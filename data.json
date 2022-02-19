@@ -1,0 +1,109 @@
+{
+    "config": {
+        "shuffle": true,
+        "auto_date_gap_size": true,
+        "date_gap_size": 1,
+        "date_delimiter": "-",
+        "weekday": {
+            "start_random": false,
+            "start_group": "A",
+            "number_of_standby": 2,
+            "number_of_backup": 2
+        },
+        "weekend": {
+            "start_random": false,
+            "start_group": "D",
+            "number_of_standby": 2,
+            "number_of_backup": 2
+        },
+        "retry_on_error": 3
+    },
+    "period": {
+        "month": 2
+    },
+    "groups": [
+        {
+            "name": "A",
+            "order_by_index": true,
+            "members": [
+                {
+                    "name": "장동림",
+                    "index": 3
+                },
+                {
+                    "name": "문미리",
+                    "index": 1
+                },
+                {
+                    "name": "김순자",
+                    "index": 2
+                }
+            ],
+            "max_available": 1
+        },
+        {
+            "name": "B",
+            "members": [
+                {
+                    "name": "서윤정",
+                    "precount": 3
+                },
+                {
+                    "name": "주효미"
+                },
+                {
+                    "name": "조희숙",
+                    "vacants": [{"start": "2-6", "end": "2-12"}]
+                }
+            ],
+            "max_available": 1
+        },
+        {
+            "name": "C",
+            "members": [
+                {
+                    "name": "심미현"
+                },
+                {
+                    "name": "김시영"
+                },
+                {
+                    "name": "원선아"
+                }
+            ],
+            "max_available": 1
+        },
+        {
+            "name": "D",
+            "members": [
+                {
+                    "name": "전희순",
+                    "dayoffs": ["2-8"]
+                },
+                {
+                    "name": "전미연"
+                },
+                {
+                    "name": "심아현",
+                    "vacants": [{"start": "2-22", "end": "2-25"}]
+                },
+                {
+                    "name": "임정희"
+                },
+                {
+                    "name": "김연수"
+                },
+                {
+                    "name": "유미선"
+                },
+                {
+                    "name": "최은주"
+                },
+                {
+                    "name": "김선희"
+                }
+            ],
+            "max_available": 3
+        }
+    ]
+}

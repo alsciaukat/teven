@@ -1,15 +1,28 @@
+# Written by Jeemin Kim.
+# Feb 20, 2022
+# github/mrharrykim
+
 from datetime import date
 
 class TevenError(Exception):
     pass
 
-class DateInterval:
-    def __init__(self, start_date: date, end_date: date):
-        self.start_date = start_date
-        self.end_date = end_date
-    def contains(self, query_date: date) -> bool:
-        return self.start_date <= query_date <= self.end_date
+class NotValidDateError(TevenError):
+    pass
 
-if __name__ == "__main__":
-    i = DateInterval(date(2022, 2, 17), date(2022, 3, 1))
-    print(i.contains(date(2022, 2, 20)))
+def isweekend(query_date: date) -> bool:
+    return query_date.isoweekday() == 6 or query_date.isoweekday() == 7
+
+def tomorrow(query_date: date, days: int = 1) -> date:
+    return date.fromordinal(query_date.toordinal() + days)
+
+def str2date(string: str, delimiter: str = "-") -> date:
+    components = tuple(map(lambda s: int(s), string.split(delimiter)))
+    today = date.today()
+    if len(components) == 2:
+        return date(today.year, components[0], components[1])
+    if len(components) == 1:
+        return date(today.year, today.month, components[0])
+    if len(components == 3):
+        return date(components[0], components[1], components[2])
+    raise NotValidDateError(f"'{string}' is not a valid date format")
