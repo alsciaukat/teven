@@ -7,6 +7,7 @@ from typing import Iterable, Union
 
 from lib.utils import TevenError, tomorrow
 
+
 class RanOutOfMemberError(TevenError):
     pass
 
@@ -27,6 +28,9 @@ class DateInterval:
 
     def __len__(self) -> int:
         return self.end_date.toordinal() - self.start_date.toordinal() + 1
+    
+    def __repr__(self) -> str:
+        return f"[{self.start_date}, {self.end_date}]"
 
     def contains(self, query_date: date) -> bool:
         """
@@ -66,7 +70,13 @@ class Person:
         self.vacants = vacants
 
     def __repr__(self) -> str:
-        return f"{self.group.name}/{self.name}"
+        return f"{self.name}"
+
+class Empty(Person):
+    def __init__(self):
+        pass
+    def __repr__(self) -> str:
+        return "Empty"
 
 class Group:
     """
@@ -271,7 +281,7 @@ class LaborPool:
             curdate:    Current date when the people is chosen.
             groups: List of Group objects that people is chosen from, if given.
         """
-        if nwn == 0:
+        if nwn <= 0:
             return labors
         if groups:
             self.available_laborforces = groups
@@ -315,7 +325,7 @@ class LaborPool:
                 counts.append((group, group.get_real_count()))
             if member_count:
                 for member in group.members:
-                    counts.append((member, member.real_count, member.precount, member.count - member.real_count + member.precount))
+                    counts.append((member, member.real_count, member.precount, member.count - member.real_count + member.precount, member.count))
         return counts
 
     def get_size(self) -> int:
